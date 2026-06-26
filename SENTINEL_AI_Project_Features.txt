@@ -1,0 +1,32 @@
+SENTINEL AI Fake Account Detector – Project Features
+
+-   Modern cybersecurity-inspired user interface.
+-   Smooth scrolling navigation.
+-   Supports Twitter, Facebook, and Instagram.
+-   Platform-specific input forms.
+-   One-click fake account analysis.
+-   Fake/Real prediction.
+-   Confidence score visualization.
+-   Precision, Recall, and F1 Score display.
+-   Risk level indicator.
+-   Explanation of why the prediction was made.
+-   Analysis history table.
+-   History filtering by platform.
+-   Detection parameter showcase.
+-   Interactive horizontal parameter cards.
+-   AI-generated profile example gallery.
+-   3D machine learning visualization.
+-   Algorithm information section.
+-   Multiple ML algorithms including:
+    -   Random Forest
+    -   AdaBoost
+    -   XGBoost
+    -   Gradient Boosting
+    -   Decision Tree
+    -   SVM / Logistic Regression
+-   Reported platform accuracies:
+    -   Twitter: up to 100%
+    -   Facebook: about 97%
+    -   Instagram: about 91%
+-   Responsive design for desktop and mobile.
+-   Animated interface and glassmorphism design.
