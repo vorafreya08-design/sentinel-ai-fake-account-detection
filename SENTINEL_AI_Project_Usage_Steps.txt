@@ -1,0 +1,24 @@
+SENTINEL AI Fake Account Detector – User Guide
+
+1.  Open the application in your web browser.
+2.  On the Home page, click Run Analysis to jump to the detector.
+3.  Select the platform:
+    -   Twitter
+    -   Facebook
+    -   Instagram
+4.  Enter the account details requested for the selected platform.
+5.  Click RUN SENTINEL ANALYSIS.
+6.  Wait for the model to analyze the data.
+7.  Review the results:
+    -   Fake/Real verdict
+    -   Confidence score
+    -   Precision
+    -   Recall
+    -   F1 Score
+    -   Risk Level
+    -   Explanation of the decision
+8.  Open the History section to view previous analyses.
+9.  Browse the Parameters section to understand which features influence
+    the prediction.
+10. View the Algorithms section to learn which machine learning models
+    are used.
