@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SENTINEL — AI Fake Account Detection</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="bg-gradient"></div>
+  <div class="scanline-overlay"></div>
+  <div id="page-trans" class="trans-in trans-out"></div>
+  <div id="cursor" style="left: 810px; top: 240px;"></div>
+  <div id="cursor-ring" style="left: 810px; top: 240px; width: 36px; height: 36px; border-color: var(--accent);"></div>
+
+  <nav>
+    <div class="nav-logo">SENTINEL<span>.AI</span></div>
+    <div class="nav-links">
+      <a href="#detector">Detect</a>
+      <a href="#parameters">Parameters</a>
+      <a href="#history">History</a>
+      <a href="#algorithms">Algorithms</a>
+    </div>
+    <button class="nav-cta">Launch API</button>
+  </nav>
+
+  <main>
+    <section id="hero">
+      <div class="hero-grid"></div>
+      <div class="hero-orb"></div>
+      <p style="font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.28em;color:var(--muted);text-transform:uppercase;margin-bottom:0.6rem;opacity:0;transform:translateY(20px);animation:fadeUp 0.7s 0.1s forwards;">PROJECT BY FREYA VORA</p>
+      <p class="hero-eyebrow">// AI-POWERED FAKE ACCOUNT THREAT INTELLIGENCE PLATFORM</p>
+      <h1 class="hero-headline">
+        <span class="accent-word">DETECT.</span><br>
+        <span class="accent2-word">EXPOSE.</span><br>
+        <span class="line2">Fake Accounts — Neutralised.</span>
+      </h1>
+      <p class="hero-sub">Multi-platform machine learning detection across Twitter, Instagram &amp; Facebook. Real-time classification powered by ensemble AI with 97–100% accuracy.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.querySelector('#detector').scrollIntoView({behavior:'smooth'})">Run Analysis</button>
+        <button class="btn-ghost" onclick="document.querySelector('#history').scrollIntoView({behavior:'smooth'})">View Past Reports</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num" id="stat-accounts">7</div>
+          <div class="label">Accounts Scanned</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">97%</div>
+          <div class="label">Peak Accuracy</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">3</div>
+          <div class="label">Platforms Covered</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="detector">
+      <div class="detector-left">
+        <div class="reveal visible">
+          <p class="section-eyebrow">// REAL-TIME CLASSIFICATION ENGINE</p>
+          <h2 class="section-title">Analyse any<br><em style="font-style:normal;color:var(--accent)">account</em><br>instantly.</h2>
+          <p class="section-desc">Input account metadata and our Random Forest ensemble model will return a verdict in under a second — with precision, recall, and F1 confidence scores.</p>
+        </div>
+        <div class="glass-card detector-form reveal reveal-delay-2 visible">
+          <div class="form-tabs">
+            <button class="form-tab" onclick="switchTab(this,&#39;twitter&#39;)">Twitter</button>
+            <button class="form-tab" onclick="switchTab(this,&#39;facebook&#39;)">Facebook</button>
+            <button class="form-tab active" onclick="switchTab(this,&#39;instagram&#39;)">Instagram</button>
+          </div>
+
+          <div id="tab-twitter" class="tab-content" style="display: none;">
+            <div class="form-group"><label>Account ID</label><input type="text" id="tw-account-id" placeholder="e.g. @username_123"></div>
+            <div class="form-row">
+              <div class="form-group"><label>Followers Count</label><input type="number" id="tw-followers" placeholder="e.g. 1200" min="0"></div>
+              <div class="form-group"><label>Friends Count</label><input type="number" id="tw-friends" placeholder="e.g. 900" min="0"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Total Tweets</label><input type="number" id="tw-tweets" placeholder="e.g. 450" min="0"></div>
+              <div class="form-group"><label>Favourites Count</label><input type="number" id="tw-fav" placeholder="e.g. 200" min="0"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Lists Count</label><input type="number" id="tw-lists" placeholder="e.g. 5" min="0"></div>
+              <div class="form-group"><label>Account Age (days)</label><input type="number" id="tw-age" placeholder="e.g. 730" min="0"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Profile Photo</label>
+                <select id="tw-photo"><option value="1">Yes</option><option value="0">No</option></select>
+              </div>
+              <div class="form-group"><label>Private Account</label>
+                <select id="tw-default"><option value="0">No</option><option value="1">Yes</option></select>
+              </div>
+            </div>
+          </div>
+
+          <div id="tab-facebook" class="tab-content" style="display:none">
+            <div class="form-group"><label>Account ID</label><input type="text" id="fb-account-id" placeholder="e.g. FacebookUser_001"></div>
+            <div class="form-row">
+              <div class="form-group"><label>Friends Count</label><input type="number" id="fb-friends" placeholder="e.g. 350" min="0"></div>
+              <div class="form-group"><label>Posts Count</label><input type="number" id="fb-posts" placeholder="e.g. 80" min="0"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Likes Received</label><input type="number" id="fb-likes" placeholder="e.g. 1500" min="0"></div>
+              <div class="form-group"><label>Account Age (days)</label><input type="number" id="fb-age" placeholder="e.g. 900" min="0"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Profile Complete</label>
+                <select id="fb-complete"><option value="1">Yes</option><option value="0">No</option></select>
+              </div>
+              <div class="form-group"><label>Profile Photo</label>
+                <select id="fb-photo"><option value="1">Yes</option><option value="0">No</option></select>
+              </div>
+            </div>
+          </div>
+
+          <div id="tab-instagram" class="tab-content" style="display: block;">
+            <div class="form-group"><label>Account ID</label><input type="text" id="ig-account-id" placeholder="e.g. @ig_handle_99"></div>
+            <div class="form-row">
+              <div class="form-group"><label>Followers</label><input type="number" id="ig-followers" placeholder="e.g. 800" min="0"></div>
+              <div class="form-group"><label>Following</label><input type="number" id="ig-following" placeholder="e.g. 1200" min="0"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Posts Count</label><input type="number" id="ig-posts" placeholder="e.g. 30" min="0"></div>
+              <div class="form-group"><label>Bio Length</label><input type="number" id="ig-bio" placeholder="e.g. 0" min="0"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>External URL</label>
+                <select id="ig-url"><option value="0">None</option><option value="1">Present</option></select>
+              </div>
+              <div class="form-group"><label>Profile Pic</label>
+                <select id="ig-pic"><option value="1">Yes</option><option value="0">No</option></select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Private Account</label>
+                <select id="ig-private"><option value="0">No</option><option value="1">Yes</option></select>
+              </div>
+              <div class="form-group"><label>Numeric Username</label>
+                <select id="ig-numeric"><option value="0">No</option><option value="1">Yes</option></select>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-analyze" onclick="runAnalysis()">⬡ RUN SENTINEL ANALYSIS</button>
+        </div>
+      </div>
+
+      <div class="detector-right reveal reveal-delay-2 visible">
+        <div class="glass-card result-panel">
+          <p class="section-eyebrow">// CLASSIFICATION OUTPUT</p>
+          <div class="result-idle" id="result-idle" style="display: none;">
+            <div class="big-icon">⬡</div>
+            <p>Awaiting input data</p>
+          </div>
+          <div class="result-active" id="result-active" style="display: flex;">
+            <div id="verdict-badge"><div class="verdict-badge verdict-fake"><span class="verdict-dot"></span>FAKE ACCOUNT DETECTED</div></div>
+            <div class="confidence-bar-wrap">
+              <div class="cb-label">
+                <span>Confidence Score</span>
+                <div class="cb-val" id="conf-val">91.0%</div>
+              </div>
+              <div class="cb-track"><div class="cb-fill" id="conf-fill" style="width: 91%;"></div></div>
+            </div>
+            <div class="result-metrics">
+              <div class="metric-card">
+                <div class="metric-label">Precision</div>
+                <div class="metric-val warn" id="m-precision">0.90</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Recall</div>
+                <div class="metric-val warn" id="m-recall">0.92</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">F1 Score</div>
+                <div class="metric-val warn" id="m-f1">0.91</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Risk Level</div>
+                <div class="metric-val bad" id="m-risk">HIGH</div>
+              </div>
+            </div>
+            <div id="result-detail" style="font-family:'Space Mono',monospace;font-size:0.72rem;line-height:1.8;color:var(--muted);padding:1rem;border:1px solid rgba(255,255,255,0.05);">Follower/Following Ratio: 0.04Bio Length: 4 charsProfile Pic: MissingNumeric Username: YesAlgorithm: Random Forest (91% accuracy on Instagram)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="parameters">
+      <div class="params-header reveal visible">
+        <p class="section-eyebrow">// CLASSIFICATION PARAMETERS</p>
+        <h2 class="section-title">What the model<br><span style="color:var(--accent2)">sees.</span></h2>
+      </div>
+      <div class="h-scroll-track">
+        <div class="glass-card param-card reveal visible">
+          <span class="param-icon">👥</span>
+          <div class="param-name">Follower / Following Ratio</div>
+          <div class="param-desc">Abnormal ratios — extremely high following with near-zero followers — are a primary bot signal across all platforms.</div>
+          <span class="param-tag">Behavioural</span>
+        </div>
+        <div class="glass-card param-card reveal reveal-delay-1 visible">
+          <span class="param-icon">📸</span>
+          <div class="param-name">Profile Photo Presence</div>
+          <div class="param-desc">Fake accounts frequently use default or stock imagery. Absence of a custom photo elevates fake probability significantly.</div>
+          <span class="param-tag">Profile Quality</span>
+        </div>
+        <div class="glass-card param-card reveal reveal-delay-2 visible">
+          <span class="param-icon">🕐</span>
+          <div class="param-name">Account Age</div>
+          <div class="param-desc">Newly created accounts with high activity volume are flagged. Authentic accounts build engagement gradually over time.</div>
+          <span class="param-tag">Temporal</span>
+        </div>
+        <div class="glass-card param-card reveal reveal-delay-3 visible">
+          <span class="param-icon">✍️</span>
+          <div class="param-name">Post / Tweet Volume</div>
+          <div class="param-desc">Extreme post volume in short timeframes indicates automated bot behaviour. Natural users show irregular posting patterns.</div>
+          <span class="param-tag">Activity</span>
+        </div>
+        <div class="glass-card param-card">
+          <span class="param-icon">📋</span>
+          <div class="param-name">Bio Completeness</div>
+          <div class="param-desc">A blank or minimal bio combined with other fake signals increases the likelihood of a synthetic identity.</div>
+          <span class="param-tag">Profile Quality</span>
+        </div>
+        <div class="glass-card param-card">
+          <span class="param-icon">❤️</span>
+          <div class="param-name">Engagement Rate</div>
+          <div class="param-desc">Likes, comments, and shares relative to follower count. Inflated followers with negligible engagement signals purchased counts.</div>
+          <span class="param-tag">Engagement</span>
+        </div>
+        <div class="glass-card param-card">
+          <span class="param-icon">🔗</span>
+          <div class="param-name">External URL Presence</div>
+          <div class="param-desc">Suspicious or absent external URLs combined with low engagement patterns correlate strongly with spam accounts.</div>
+          <span class="param-tag">Content</span>
+        </div>
+        <div class="glass-card param-card">
+          <span class="param-icon">🔢</span>
+          <div class="param-name">Username Patterns</div>
+          <div class="param-desc">Numeric-heavy or randomly generated usernames are statistically overrepresented among fake accounts on Instagram.</div>
+          <span class="param-tag">Identity</span>
+        </div>
+        <div class="glass-card param-card">
+          <span class="param-icon">📋</span>
+          <div class="param-name">List Membership</div>
+          <div class="param-desc">Legitimate Twitter accounts accumulate public list memberships over time. Zero list presence is a subtle but useful signal.</div>
+          <span class="param-tag">Social Graph</span>
+        </div>
+      </div>
+      <div class="scroll-hint reveal visible">Scroll horizontally to explore all 9 detection parameters</div>
+
+      <div style="padding:3rem 3rem 0;"><p class="section-eyebrow reveal visible">// AI-GENERATED FAKE PROFILE EXAMPLES</p></div>
+      <div class="df-strip">
+        <div class="df-img-card"><canvas class="df-canvas" id="df1" width="200" height="200"></canvas><div class="df-img-label fake">⬡ FAKE DETECTED</div></div>
+        <div class="df-img-card"><canvas class="df-canvas" id="df2" width="200" height="200"></canvas><div class="df-img-label real">✓ VERIFIED REAL</div></div>
+        <div class="df-img-card"><canvas class="df-canvas" id="df3" width="200" height="200"></canvas><div class="df-img-label fake">⬡ FAKE DETECTED</div></div>
+        <div class="df-img-card"><canvas class="df-canvas" id="df4" width="200" height="200"></canvas><div class="df-img-label real">✓ VERIFIED REAL</div></div>
+        <div class="df-img-card"><canvas class="df-canvas" id="df5" width="200" height="200"></canvas><div class="df-img-label fake">⬡ FAKE DETECTED</div></div>
+        <div class="df-img-card"><canvas class="df-canvas" id="df6" width="200" height="200"></canvas><div class="df-img-label real">✓ VERIFIED REAL</div></div>
+      </div>
+    </section>
+
+    <section id="visualization">
+      <div class="reveal visible">
+        <p class="section-eyebrow">// 3D MODEL REPRESENTATION</p>
+        <h2 class="section-title">Multi-<span style="color:var(--accent)">dimensional</span><br>feature space.</h2>
+        <p class="section-desc" style="margin-bottom:2rem;">Our classifier operates in a 9-dimensional feature space, mapping each account to a point. Fake accounts cluster in predictable regions — exposed by Random Forest decision boundaries.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem;">
+          <div class="glass-card" style="padding:1.2rem;">
+            <div style="font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;color:var(--muted);text-transform:uppercase;margin-bottom:0.4rem;">Twitter Accuracy</div>
+            <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent);">100%</div>
+          </div>
+          <div class="glass-card" style="padding:1.2rem;">
+            <div style="font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;color:var(--muted);text-transform:uppercase;margin-bottom:0.4rem;">Facebook Accuracy</div>
+            <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent2);">97%</div>
+          </div>
+          <div class="glass-card" style="padding:1.2rem;">
+            <div style="font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;color:var(--muted);text-transform:uppercase;margin-bottom:0.4rem;">Instagram Accuracy</div>
+            <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent3);">91%</div>
+          </div>
+          <div class="glass-card" style="padding:1.2rem;">
+            <div style="font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;color:var(--muted);text-transform:uppercase;margin-bottom:0.4rem;">Models Evaluated</div>
+            <div style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--text);">7</div>
+          </div>
+        </div>
+      </div>
+      <div class="cube-scene reveal reveal-delay-2 visible">
+        <div class="cube">
+          <div class="cube-face front">Random<br>Forest</div>
+          <div class="cube-face back">AdaBoost</div>
+          <div class="cube-face right">XGBoost</div>
+          <div class="cube-face left">Gradient<br>Boost</div>
+          <div class="cube-face top">Decision<br>Tree</div>
+          <div class="cube-face bottom">SVM</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="algorithms">
+      <div class="reveal visible">
+        <p class="section-eyebrow">// ENSEMBLE ALGORITHM SUITE</p>
+        <h2 class="section-title">Seven models.<br><span style="color:var(--accent2)">One verdict.</span></h2>
+        <p class="section-desc">Each platform is matched to its optimal classifier, trained on real-world account data and evaluated across accuracy, precision, recall and F1 score.</p>
+      </div>
+      <div class="algo-grid">
+        <div class="glass-card algo-card reveal visible">
+          <div class="algo-num">01 // CHAMPION</div>
+          <div class="algo-name">Random Forest</div>
+          <div class="algo-desc">Ensemble of decision trees using bagging. Best performer across all three platforms. Resists overfitting and captures non-linear feature interactions with ease.</div>
+          <div class="algo-acc">97–100%<span>Peak platform accuracy</span></div>
+        </div>
+        <div class="glass-card algo-card reveal reveal-delay-1 visible">
+          <div class="algo-num">02</div>
+          <div class="algo-name">AdaBoost</div>
+          <div class="algo-desc">Adaptive boosting builds a strong classifier from weak learners sequentially. Achieves 95–100% depending on platform, excels on clean datasets.</div>
+          <div class="algo-acc">95–100%<span>Boosted ensemble accuracy</span></div>
+        </div>
+        <div class="glass-card algo-card reveal reveal-delay-2 visible">
+          <div class="algo-num">03</div>
+          <div class="algo-name">XGBoost</div>
+          <div class="algo-desc">Gradient-boosted trees with regularisation and speed optimisations. 94% on Facebook, strong across all platforms with reduced inference time.</div>
+          <div class="algo-acc">94%<span>Facebook dataset</span></div>
+        </div>
+        <div class="glass-card algo-card reveal visible">
+          <div class="algo-num">04</div>
+          <div class="algo-name">Gradient Boosting</div>
+          <div class="algo-desc">Sequential model building that corrects errors from prior iterations. Highly effective for structured social media account metadata.</div>
+          <div class="algo-acc">93%<span>Cross-platform average</span></div>
+        </div>
+        <div class="glass-card algo-card reveal reveal-delay-1 visible">
+          <div class="algo-num">05</div>
+          <div class="algo-name">Decision Tree</div>
+          <div class="algo-desc">Single interpretable tree — perfect 100% score on the Twitter dataset. Visualisable decision paths make it ideal for audit and compliance reporting.</div>
+          <div class="algo-acc">100%<span>Twitter dataset (perfect)</span></div>
+        </div>
+        <div class="glass-card algo-card reveal reveal-delay-2 visible">
+          <div class="algo-num">06</div>
+          <div class="algo-name">SVM / Logistic Reg.</div>
+          <div class="algo-desc">Linear models used as baselines. SVC achieves 97% on Twitter; Logistic Regression shows limitations on non-linear feature boundaries across all platforms.</div>
+          <div class="algo-acc">90–97%<span>Linear model range</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="history">
+      <div class="history-header reveal visible">
+        <div>
+          <p class="section-eyebrow">// PAST ANALYSIS ARCHIVE</p>
+          <h2 class="section-title">Detection <span style="color:var(--accent)">History.</span></h2>
+        </div>
+        <div class="history-filter">
+          <button class="filter-btn active" onclick="filterHistory(this,&#39;all&#39;)">All</button>
+          <button class="filter-btn" onclick="filterHistory(this,&#39;twitter&#39;)">Twitter</button>
+          <button class="filter-btn" onclick="filterHistory(this,&#39;facebook&#39;)">Facebook</button>
+          <button class="filter-btn" onclick="filterHistory(this,&#39;instagram&#39;)">Instagram</button>
+        </div>
+      </div>
+      <div class="glass-card reveal visible" style="overflow:auto;">
+        <table class="history-table" id="history-table">
+          <thead>
+            <tr>
+              <th>Account ID</th>
+              <th>Platform</th>
+              <th>Verdict</th>
+              <th>Confidence</th>
+              <th>Algorithm</th>
+              <th>Timestamp</th>
+            </tr>
+          </thead>
+          <tbody id="history-tbody">
+            </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-logo">SENTINEL.AI</div>
+      <p>Multi-platform fake account detection</p>
+      <p style="color:var(--accent);font-family:'Space Mono',monospace;font-size:0.65rem;">// ALL SYSTEMS OPERATIONAL</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
